@@ -1,0 +1,21 @@
+.blogPostList {
+  display: grid;
+  grid-gap: 20px;
+  /* Mobile first - single column */
+  grid-template-columns: 1fr;
+  padding: 10px;
+}
+
+/* Tablet - two columns */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .blogPostList {
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+  }
+}
+
+/* Desktop - three columns */
+@media (min-width: 1200px) {
+  .blogPostList {
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+  }
+}
