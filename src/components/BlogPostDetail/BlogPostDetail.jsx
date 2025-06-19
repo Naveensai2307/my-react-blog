@@ -3,7 +3,7 @@ import styles from './BlogPostDetail.module.css';
 
 const BlogPostDetail = ({ title, content, author, date }) => {
   if (!title || !content || !author || !date) {
-    return <p className={styles.notFound}>Blog post not found.</p>;
+    return <p>Blog post not found.</p>;
   }
 
   const formattedDate = new Date(date).toLocaleDateString('en-US', {

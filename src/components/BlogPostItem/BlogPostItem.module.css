@@ -2,6 +2,8 @@
   background: #fff;
   border: 1px solid #ddd;
   padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .title {
@@ -24,4 +26,39 @@
   color: #999;
   font-size: 14px;
   margin-top: 8px;
+}
+
+@media (max-width: 1199px) {
+  .blogPostItem {
+    padding: 16px;
+  }
+  .title {
+    font-size: 20px;
+  }
+  .summary {
+    font-size: 15px;
+  }
+  .date {
+    font-size: 13px;
+  }
+}
+@media (max-width: 768px) {
+  .blogPostItem {
+    padding: 12px;
+  }
+  .title {
+    font-size: 18px;
+  }
+  .summary {
+    font-size: 14px;
+  }
+  .date {
+    font-size: 12px;
+  }
+}
+@media (min-width: 1200px) {
+  .blogPostItem {
+    width: 100%;
+    grid-column: 1 / -1;
+  }
 }

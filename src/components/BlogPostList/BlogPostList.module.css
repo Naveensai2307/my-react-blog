@@ -19,3 +19,43 @@
     grid-template-columns: repeat(3, minmax(300px, 1fr));
   }
 }
+
+/* Mobile & Tablet: Make buttons full width and add spacing */
+@media (max-width: 1199px) {
+  .blogPostList button {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  .blogPostList a {
+    width: 100%;
+    display: block;
+  }
+}
+
+.topBar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  grid-column: 1 / -1;
+}
+
+/* Mobile: Make button full width */
+@media (max-width: 767px) {
+  .topBar {
+    justify-content: center;
+  }
+  .topBar button {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  .topBar a {
+    width: 100%;
+    display: block;
+  }
+}
