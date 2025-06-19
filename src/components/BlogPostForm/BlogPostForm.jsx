@@ -9,7 +9,16 @@ const BlogPostForm = ({ post, onSubmit }) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (post) {
+      setTitle(post.title || '');
+      setContent(post.content || '');
+      setAuthor(post.author || '');
+      setDate(post.date || '');
+    }
+  }, [post]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
     if (!title) newErrors.title = 'Required';
@@ -22,43 +31,59 @@ const BlogPostForm = ({ post, onSubmit }) => {
     } else {
       setErrors({});
       setIsSubmitting(true);
-      onSubmit({ title, content, author, date });
+      await onSubmit({ title, content, author, date });
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <form className={styles.blogPostForm} onSubmit={handleSubmit}>
+    <form className={styles.blogPostForm} onSubmit={handleSubmit} noValidate>
       <div className={styles.formGroup}>
         <label htmlFor="title">Title</label>
         <input
           id="title"
+          type="text"
+          autoComplete="off"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className={errors.title ? styles.invalid : ''}
+          aria-invalid={!!errors.title}
+          aria-describedby={errors.title ? 'title-error' : undefined}
         />
-        {errors.title && <p className={styles.error}>{errors.title}</p>}
+        {errors.title && (
+          <p className={styles.error} id="title-error" role="alert">{errors.title}</p>
+        )}
       </div>
 
       <div className={styles.formGroup}>
         <label htmlFor="content">Content</label>
         <textarea
           id="content"
+          autoComplete="off"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className={errors.content ? styles.invalid : ''}
+          aria-invalid={!!errors.content}
+          aria-describedby={errors.content ? 'content-error' : undefined}
+          rows={6}
         />
-        {errors.content && <p className={styles.error}>{errors.content}</p>}
+        {errors.content && (
+          <p className={styles.error} id="content-error" role="alert">{errors.content}</p>
+        )}
       </div>
 
       <div className={styles.formGroup}>
         <label htmlFor="author">Author</label>
         <input
           id="author"
+          type="text"
+          autoComplete="off"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
-          className={errors.author ? styles.invalid : ''}
+          aria-invalid={!!errors.author}
+          aria-describedby={errors.author ? 'author-error' : undefined}
         />
-        {errors.author && <p className={styles.error}>{errors.author}</p>}
+        {errors.author && (
+          <p className={styles.error} id="author-error" role="alert">{errors.author}</p>
+        )}
       </div>
 
       <div className={styles.formGroup}>
@@ -68,14 +93,20 @@ const BlogPostForm = ({ post, onSubmit }) => {
           id="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className={errors.date ? styles.invalid : ''}
+          aria-invalid={!!errors.date}
+          aria-describedby={errors.date ? 'date-error' : undefined}
         />
-        {errors.date && <p className={styles.error}>{errors.date}</p>}
+        {errors.date && (
+          <p className={styles.error} id="date-error" role="alert">{errors.date}</p>
+        )}
       </div>
 
-      <div className={styles.buttonWrapper}>
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Submit'}
+      <div className={styles.buttonRow} style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <button type="button" onClick={() => console.log('Edit Post clicked')}>
+          Edit Post
+        </button>
+        <button type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
+          {isSubmitting ? 'Submitting...' : 'Create Post'}
         </button>
       </div>
     </form>
