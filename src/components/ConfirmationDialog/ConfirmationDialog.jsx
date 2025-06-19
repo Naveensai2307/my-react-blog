@@ -6,7 +6,7 @@ const ConfirmationDialog = ({ isOpen, onClose, onConfirm }) => {
 
   useEffect(() => {
     if (isOpen) {
-      dialogRef.current?.focus();
+      dialogRef.current?.focus()
     }
   }, [isOpen]);
 
