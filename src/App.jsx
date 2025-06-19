@@ -107,19 +107,19 @@ const ViewPostPage = () => {
 };
 
 const App = () => {
-	return (
-		<Router>
-			<div>
-				<h1>Blog Posts</h1>
-				<Routes>
-					<Route path="/" element={<BlogPostList posts={samplePosts} />} />
-					<Route path="/new" element={<NewPostPage />} />
-					<Route path="/edit/:postId" element={<EditPostPage />} />
-					<Route path="/posts/:postId" element={<ViewPostPage />} />
-				</Routes>
-			</div>
-		</Router>
-	);
+  return (
+    <Router>
+      <div>
+        <h1>Blog Posts</h1>
+        <Routes>
+          <Route path="/" element={<BlogPostList posts={samplePosts} />} />
+          <Route path="/new" element={<NewPostPage />} />
+          <Route path="/edit/:postId" element={<EditPostPage />} />
+          <Route path="/posts/:postId" element={<ViewPostPage />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 };
 
 export default App;

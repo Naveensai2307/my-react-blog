@@ -20,7 +20,7 @@ body {
 }
 
 .blogPostForm {
-  max-width: 600px; /* Reduce size of Blog Post */
+  max-width: 800px; /* Increased width */
   min-height: 700px; /* A4 height in px at 96dpi */
   width: 100%;
   font-family: 'Arial', sans-serif;
@@ -67,6 +67,29 @@ body {
   text-align: center;
 }
 
+/* Ensure text boxes stay within form borders */
+.blogPostForm input[type="text"],
+.blogPostForm textarea {
+  width: 100%;
+  max-width: 100%; /* Prevent crossing form borders */
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Ensure Publication Date text box stays within form borders */
+.blogPostForm input[type="date"] {
+  width: 100%;
+  max-width: 100%; /* Prevent crossing form borders */
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .formGroup input:focus,
 .formGroup textarea:focus {
   outline: 2px solid #007bff;
@@ -107,6 +130,92 @@ button:disabled {
   justify-content: flex-start; /* Shift Edit Post button to the left corner */
   width: 100%;
   margin-top: 28px;
+}
+
+/* Center the DeleteButton and make it full width */
+.deleteButton {
+  width: 100%;
+  background-color: #FF0000;
+  color: #FFFFFF;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  display: block;
+  margin: 0 auto; /* Center the button */
+}
+
+.deleteButton:focus {
+  outline: 2px solid #007BFF;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog {
+  background-color: #FFFFFF;
+  max-width: 400px;
+  width: 90%;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dialog h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.dialog p {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.buttons button:first-child {
+  background-color: #CCCCCC;
+  color: #000000;
+}
+
+.buttons button:last-child {
+  background-color: #FF0000;
+  color: #FFFFFF;
+}
+
+.buttons button:focus {
+  outline: 2px solid #007BFF;
+}
+
+/* Reduce spaces between form headings */
+.blogPostForm h1,
+.blogPostForm h2,
+.blogPostForm h3 {
+  margin: 10px 0; /* Reduce vertical spacing */
 }
 
 /* Mobile Responsive */
