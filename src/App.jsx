@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import BlogPostList from './components/BlogPostList/BlogPostList';
 import BlogPostForm from './components/BlogPostForm/BlogPostForm';
+import Layout from './components/Layout/Layout';
+import Pull from './components/Pull';
 import './App.module.css';
 
 const samplePosts = [
@@ -109,15 +111,15 @@ const ViewPostPage = () => {
 const App = () => {
   return (
     <Router>
-      <div>
-        <h1>Blog Posts</h1>
+      <Layout>
         <Routes>
           <Route path="/" element={<BlogPostList posts={samplePosts} />} />
           <Route path="/new" element={<NewPostPage />} />
           <Route path="/edit/:postId" element={<EditPostPage />} />
           <Route path="/posts/:postId" element={<ViewPostPage />} />
+          <Route path="/pull" element={<Pull />} />
         </Routes>
-      </div>
+      </Layout>
     </Router>
   );
 };

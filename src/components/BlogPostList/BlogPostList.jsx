@@ -18,7 +18,14 @@ const BlogPostList = ({ posts }) => {
         </Link>
       </div>
       {posts.map((post) => (
-        <div key={post.id} style={{ position: 'relative' }}>
+        <div key={post.id} className={styles.blogPostCard}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-start', marginBottom: 4, paddingTop: 8, paddingRight: 8 }}>
+            <Link to={`/edit/${post.id}`}>
+              <button style={{ padding: '6px 16px', background: '#28a745', color: '#fff', border: '0.5px solid #1976d2', borderRadius: 6, fontSize: 15, cursor: 'pointer', fontWeight: 600, boxShadow: '0 2px 8px rgba(40,167,69,0.08)' }}>
+                Edit
+              </button>
+            </Link>
+          </div>
           <BlogPostItem
             id={post.id}
             title={post.title}
@@ -26,11 +33,6 @@ const BlogPostList = ({ posts }) => {
             date={post.date}
             url={post.url}
           />
-          <Link to={`/edit/${post.id}`} style={{ position: 'absolute', top: 10, right: 10 }}>
-            <button style={{ padding: '6px 12px', background: '#28a745', color: '#fff', border: 'none', borderRadius: 4, fontSize: 14, cursor: 'pointer' }}>
-              Edit
-            </button>
-          </Link>
         </div>
       ))}
     </div>

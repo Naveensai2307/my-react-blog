@@ -1,8 +1,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  width: 100%; /* Remove blank space on left and right */
-  background: none; /* Remove background colors */
+  width: 100%;
+  background: none !important; /* Strictly remove background */
 }
 
 body {
@@ -10,6 +10,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: none !important;
 }
 
 #root {
@@ -17,24 +18,25 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: none !important;
 }
 
 .blogPostForm {
-  max-width: 800px; /* Increased width */
-  min-height: 700px; /* A4 height in px at 96dpi */
+  max-width: 800px;
+  min-height: 700px;
   width: 100%;
   font-family: 'Arial', sans-serif;
-  background: none; /* Remove background colors from the form */
+  background: none !important; /* Strictly remove background */
   border-radius: 10px;
-  border-top: none; /* Remove color at the top */
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-  padding: 20px; /* Adjust padding */
+  border-top: none;
+  box-shadow: none !important; /* Remove shadow for full transparency */
+  padding: 20px;
   display: flex;
-  flex-direction: column; /* Ensure fields are stacked vertically */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin: 0 auto; /* Center the form */
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
@@ -132,6 +134,32 @@ button:disabled {
   margin-top: 28px;
 }
 
+.buttonRow button,
+.buttonRow .deleteButton {
+  height: 48px;
+  min-width: 140px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: 1.5px solid #1976d2;
+  box-sizing: border-box;
+  margin-right: 12px;
+  margin-left: 0;
+  padding: 0 24px;
+  display: inline-block;
+}
+
+.buttonRow .deleteButton {
+  background-color: #FF0000;
+  color: #FFFFFF;
+  font-weight: bold;
+  border: 1.5px solid #FF0000;
+}
+
+.buttonRow button:last-child,
+.buttonRow .deleteButton:last-child {
+  margin-right: 0;
+}
+
 /* Center the DeleteButton and make it full width */
 .deleteButton {
   width: 100%;
@@ -164,12 +192,8 @@ button:disabled {
 }
 
 .dialog {
-  background-color: #FFFFFF;
-  max-width: 400px;
-  width: 90%;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: none !important; /* Remove dialog background */
+  box-shadow: none !important;
 }
 
 .dialog h2 {
@@ -235,7 +259,8 @@ button:disabled {
     padding: 20px 8px;
     margin: 40px 0;
     border-radius: 0;
-    box-shadow: none;
+    box-shadow: none !important;
+    background: none !important;
   }
   .formGroup {
     flex-direction: column;
@@ -254,6 +279,7 @@ button:disabled {
     width: 100%;
     font-size: 15px;
     padding: 10px;
+    background: none !important; /* Remove input backgrounds */
   }
   .error {
     margin-left: 0;
@@ -272,11 +298,11 @@ button:disabled {
 
 @media print {
   .blogPostForm {
-    box-shadow: none;
+    background: none !important;
+    box-shadow: none !important;
     border-radius: 0;
     margin: 0 auto;
     padding: 40px 48px;
-    background: #fff;
     width: 900px;
     min-height: 700px;
     max-width: 900px;
