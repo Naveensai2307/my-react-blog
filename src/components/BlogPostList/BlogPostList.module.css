@@ -6,6 +6,22 @@
   padding: 10px;
 }
 
+.blogPostCard {
+  background: none;
+  border: 1px solid #1976d2;
+  border-radius: 12px;
+  min-height: 220px;
+  min-width: 260px;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-bottom: 0;
+  padding: 0 0 12px 0;
+}
+
 /* Tablet - two columns */
 @media (min-width: 769px) and (max-width: 1199px) {
   .blogPostList {

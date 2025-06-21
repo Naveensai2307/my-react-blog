@@ -118,16 +118,16 @@ const BlogPostForm = ({ post, onSubmit }) => {
           )}
         </div>
 
-        <div className={styles.buttonRow} style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className={styles.buttonRow} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button type="button" onClick={() => console.log('Edit Post clicked')}>
             Edit Post
           </button>
           <button type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
             {isSubmitting ? 'Submitting...' : 'Create Post'}
           </button>
+          <DeleteButton onClick={handleDeleteClick} />
         </div>
       </form>
-      <DeleteButton onClick={handleDeleteClick} />
       <ConfirmationDialog
         isOpen={isDialogOpen}
         onClose={handleDialogClose}
