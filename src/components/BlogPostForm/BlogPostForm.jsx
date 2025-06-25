@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './BlogPostForm.module.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import ConfirmationDialog from '../ConfirmationDialog/ConfirmationDialog';
+import CommentForm from '../Comment/CommentForm'; // Import CommentForm
 
 const BlogPostForm = ({ post, onSubmit }) => {
   const [title, setTitle] = useState(post?.title || '');
@@ -128,6 +129,12 @@ const BlogPostForm = ({ post, onSubmit }) => {
           <DeleteButton onClick={handleDeleteClick} />
         </div>
       </form>
+      {/* Comment Section for BlogPostForm */}
+      <div style={{ marginTop: 32, width: '100%' }}>
+        <h3 style={{ marginBottom: 12 }}>Comments</h3>
+        {/* You can pass appropriate props for isLoggedIn and userName if needed */}
+        <CommentForm onSubmit={() => {}} isLoggedIn={false} userName={''} />
+      </div>
       <ConfirmationDialog
         isOpen={isDialogOpen}
         onClose={handleDialogClose}
