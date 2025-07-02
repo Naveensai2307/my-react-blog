@@ -6,6 +6,7 @@ import Layout from './components/Layout/Layout';
 import Pull from './components/Pull';
 import CommentList from './components/Comment/CommentList';
 import CommentForm from './components/Comment/CommentForm';
+import NavBar from './components/NavBar/NavBar';
 import './App.module.css';
 
 const samplePosts = [
@@ -146,11 +147,18 @@ const ViewPostPage = () => {
 };
 
 const App = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const filteredPosts = samplePosts.filter(
+    post =>
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.content.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   return (
     <Router>
       <Layout>
+        <NavBar onSearch={setSearchQuery} />
         <Routes>
-          <Route path="/" element={<BlogPostList posts={samplePosts} />} />
+          <Route path="/" element={<BlogPostList posts={filteredPosts} searchQuery={searchQuery} />} />
           <Route path="/new" element={<NewPostPage />} />
           <Route path="/edit/:postId" element={<EditPostPage />} />
           <Route path="/posts/:postId" element={<ViewPostPage />} />
