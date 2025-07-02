@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import BlogPostList from './components/BlogPostList/BlogPostList';
 import BlogPostForm from './components/BlogPostForm/BlogPostForm';
 import Layout from './components/Layout/Layout';
 import Pull from './components/Pull';
+import CommentList from './components/Comment/CommentList';
+import CommentForm from './components/Comment/CommentForm';
 import './App.module.css';
 
 const samplePosts = [
@@ -36,6 +38,15 @@ const samplePosts = [
 	},
 ];
 
+const initialComments = {
+	'1': [
+		{ name: 'Jane', date: new Date(), text: 'Great post!', avatar: '' },
+		{ name: 'John', date: new Date(), text: 'Thanks for sharing.', avatar: '' },
+	],
+	'2': [],
+	'3': [],
+};
+
 const handleBlogPostSubmit = (data) => {
 	alert('Blog post submitted!\n' + JSON.stringify(data, null, 2));
 };
@@ -43,7 +54,23 @@ const handleBlogPostSubmit = (data) => {
 const BackToListButton = () => {
     const navigate = useNavigate();
     return (
-        <button style={{ marginBottom: 20, width: '100%', maxWidth: 340, fontSize: 18, borderRadius: 8, background: '#007bff', color: '#fff', border: 'none', padding: '10px 0', cursor: 'pointer', fontWeight: 600, letterSpacing: 1 }} onClick={() => navigate('/')}>Back to List</button>
+        <button 
+            style={{ 
+                backgroundColor: '#007bff', // Match Create Post button color
+                color: '#FFFFFF',
+                borderRadius: 4,
+                padding: '10px 20px',
+                fontSize: 16,
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                border: 'none',
+                marginBottom: 20,
+                width: 'auto',
+            }} 
+            onClick={() => navigate('/')}
+        >
+            Back
+        </button>
     );
 };
 
@@ -75,7 +102,13 @@ const ViewPostPage = () => {
     const { postId } = useParams();
     const post = samplePosts.find((p) => p.id === postId);
     const navigate = useNavigate();
+    const [comments, setComments] = useState(initialComments[postId] || []);
+    const isLoggedIn = false; // Replace with real auth logic
+    const userName = '';
     if (!post) return <div>Post not found.</div>;
+    const handleAddComment = (comment) => {
+        setComments((prev) => [...prev, { ...comment, date: new Date(), avatar: '' }]);
+    };
     return (
         <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#f4f6fa' }}>
             <div style={{ maxWidth: '900px', width: '100%', background: '#fff', borderRadius: 16, boxShadow: '0 8px 32px rgba(0,0,0,0.12)', padding: '48px 56px', margin: '0 24px' }}>
@@ -97,6 +130,10 @@ const ViewPostPage = () => {
                       <div style={{ fontWeight: 600, color: '#333', marginBottom: 4 }}>Content</div>
                       <div style={{ fontSize: 20, lineHeight: 1.7, color: '#222', whiteSpace: 'pre-line' }}>{post.content}</div>
                     </div>
+                    {/* Comment Section */}
+                    <h3 style={{ marginTop: 32, marginBottom: 12 }}>Comments</h3>
+                    <CommentList comments={comments} />
+                    <CommentForm onSubmit={handleAddComment} isLoggedIn={isLoggedIn} userName={userName} />
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center', gap: 16, width: '100%' }}>
                     <button style={{width: 220, fontSize: 18, borderRadius: 8, background: '#28a745', color: '#fff', border: 'none', padding: '12px 0', cursor: 'pointer'}} onClick={() => navigate(`/edit/${post.id}`)}>Edit Post</button>
