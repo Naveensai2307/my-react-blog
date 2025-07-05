@@ -1,11 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './NavBar.module.css';
+import SearchBar from '../SearchBar/SearchBar';
 
-const NavBar = () => {
+const NavBar = ({ onSearch }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -35,10 +43,13 @@ const NavBar = () => {
       <Link to="/" className={styles.logo} tabIndex={0}>
         BlogApp
       </Link>
-      <div className={styles.links}>
-        <Link to="/" tabIndex={0}>Home</Link>
-        <Link to="/blog" tabIndex={0}>Blog</Link>
-        <Link to="/about" tabIndex={0} className={styles.aboutLink}>About</Link>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+        <SearchBar onSearch={onSearch} isMobile={isMobile} />
+        <div className={styles.links}>
+          <Link to="/" tabIndex={0}>Home</Link>
+          <Link to="/blog" tabIndex={0}>Blog</Link>
+          <Link to="/about" tabIndex={0} className={styles.aboutLink}>About</Link>
+        </div>
       </div>
       <button
         ref={buttonRef}
